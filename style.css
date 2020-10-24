@@ -1,0 +1,26 @@
+table, th, td {
+    border: 1px solid #eeeeee;
+    margin-right: auto;
+    font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom:1.5em;
+}
+th {
+    font-weight: normal;
+    text-align: center;
+    color: #AAAAAA
+    width: 10em;
+}
+tr {
+    margin-bottom: 1.5em;
+}
+td {
+    width: 10em;
+}
+
+.book-read {
+    text-align: center;
+}
