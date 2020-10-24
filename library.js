@@ -20,13 +20,13 @@ let Library = (() => {
     
     }
 
-    function addBookToLibrary(book) {
+    function addBook(book) {
         myLibrary.push(book)
     }
 
     function renderLibrary(library) {
         let tableBody = document.getElementsByTagName('tbody')[0]
-        removeChildren(tableBody) 
+        _removeChildren(tableBody) 
         for (book in library) {
             tableBody.appendChild(_getBookRow(library[book], book))
         }
@@ -48,7 +48,7 @@ let Library = (() => {
         readState.setAttribute('type', 'checkbox')
         readState.checked = book.read
         readState.onclick = function () {
-            toggleRead(myLibrary, id)
+            _toggleRead(myLibrary, id)
         }
         read.appendChild(readState)
         let remove = document.createElement('button')
@@ -66,7 +66,7 @@ let Library = (() => {
         let base = document.getElementById('book-form')
         let bookForm = document.createElement('form')
         // Remove form if it already exists
-        removeChildren(base)
+        _removeChildren(base)
     
         let TITLE = document.createElement('input')
         TITLE.setAttribute('id', 'book-title')
@@ -92,7 +92,7 @@ let Library = (() => {
         READ.setAttribute('name', 'BookRead')
     
         let SUBMIT = document.createElement('button')
-        SUBMIT.onclick = function(){submitBook()}
+        SUBMIT.onclick = function(){_submitBook()}
         SUBMIT.setAttribute('type', 'button')
         SUBMIT.textContent = 'SUBMIT'
     
@@ -105,15 +105,15 @@ let Library = (() => {
         base.appendChild(bookForm)
     }
 
-    function submitBook() {
+    function _submitBook() {
         let form = document.getElementById('book-form')
         let title = document.getElementById('book-title').value
         let author = document.getElementById('book-author').value
         let pages = document.getElementById('book-pages').value
         let read = document.getElementById('book-read').checked
         let newBook = new Book(title, author, pages, read)
-        addBookToLibrary(newBook)
-        removeChildren(form)
+        addBook(newBook)
+        _removeChildren(form)
         renderLibrary(myLibrary)
     }
     
@@ -122,12 +122,12 @@ let Library = (() => {
         renderLibrary(library)
     }
     
-    function toggleRead(library, id) {
+    function _toggleRead(library, id) {
         library[id]['read'] = !(library[id]['read'])
         renderLibrary(library)
     }
 
-    function removeChildren(element) {
+    function _removeChildren(element) {
         // Gabriel McAdams on Stackoverflow had a great point
         // about selecting by first child and deleting last
         // child as most likely these are going to be the fastest
@@ -141,7 +141,8 @@ let Library = (() => {
 
     return {
         renderLibrary,
-        addBookToLibrary,
+        addBook,
+        removeBook,
         renderBookForm
     }
 })()
