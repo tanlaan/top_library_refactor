@@ -73,12 +73,15 @@ let Library = (() => {
         TITLE.setAttribute('type', 'text')
         TITLE.setAttribute('name', 'BookTitle')
         TITLE.setAttribute('placeholder', 'Title')
+        TITLE.setAttribute('minlength', '2')
+        TITLE.required = true
     
         let AUTHOR = document.createElement('input')
         AUTHOR.setAttribute('id', 'book-author')
         AUTHOR.setAttribute('type', 'text')
         AUTHOR.setAttribute('name', 'BookAuthor')
         AUTHOR.setAttribute('placeholder', 'Author')
+        AUTHOR.required = true;
     
         let PAGES = document.createElement('input')
         PAGES.setAttribute('id', 'book-pages')
@@ -92,8 +95,11 @@ let Library = (() => {
         READ.setAttribute('name', 'BookRead')
     
         let SUBMIT = document.createElement('button')
-        SUBMIT.onclick = function(){_submitBook()}
-        SUBMIT.setAttribute('type', 'button')
+        SUBMIT.onclick = function(event){
+            if (!TITLE.validity.valueMissing && !AUTHOR.validity.valueMissing) {
+                _submitBook()}
+            }
+        SUBMIT.setAttribute('type', 'submit')
         SUBMIT.textContent = 'SUBMIT'
     
         bookForm.appendChild(TITLE)
